@@ -9,9 +9,8 @@ on:
     branches:
       - main
 
-defaults:
-  run:
-    working-directory: 'ApplicationCode/UI/AngularApp-Employees_Dashboard/'
+env:
+  app-dir: 'ApplicationCode/UI/AngularApp-Employees_Dashboard/'
 
 jobs:
   build_and_deploy_job:
@@ -28,11 +27,10 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLUE_GRASS_0093DB910 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
-          working-directory: ''
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "/" # App source code path
+          app_location: ${{ env.app-dir }} # App source code path
           api_location: "" # Api source code path - optional
-          output_location: "dist/crud-app" # Built app content directory - optional
+          output_location: "${{ env.app-dir }}/dist/crud-app" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
           
