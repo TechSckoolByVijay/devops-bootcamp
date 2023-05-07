@@ -1,0 +1,46 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_NAME: your-project-name
+  IMAGE_TAG: latest
+  # K8S_NAMESPACE: your-k8s-namespace
+  # K8S_CONTEXT: your-k8s-context
+  # K8S_SERVER: your-k8s-server
+  # K8S_TOKEN: ${{ secrets.K8S_TOKEN }}
+  AZURE_CONTAINER_REGISTRY: "demo002"
+  NAMESPACE: "microsvc2"
+  CONTAINER_NAME: "djangoapp"
+  RESOURCE_GROUP: "kube"
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: AZ Login
+      run: az login --service-principal -u 1cfd3457-23ed-4591-9e6b-cfed3ad0770f -p MfY8Q~i-C3XuABqbNWrmVstFcNO_pCn5oOV4Zb~T --tenant ab834a0e-d914-4111-9d90-210d9c0c5212
+
+    - name: Build Docker image
+      run: |
+        az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
+      working-directory: 'ApplicationCode/Services/Django-app/shopping_cart'
+
+    # - name: Deploy to Kubernetes
+    #   uses: appleboy/kubectl-action@master
+    #   with:
+    #     args: |
+    #       apply -f kubernetes/deployment.yaml -f kubernetes/service.yaml
+    #     kubeconfig: ${{ secrets.KUBECONFIG }}
+    #     namespace: ${{ env.K8S_NAMESPACE }}
+    #     context: ${{ env.K8S_CONTEXT }}
+    #     server: ${{ env.K8S_SERVER }}
+    #     token: ${{ env.K8S_TOKEN }}
