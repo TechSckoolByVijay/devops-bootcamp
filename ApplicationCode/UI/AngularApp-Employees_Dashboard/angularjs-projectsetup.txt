@@ -1,0 +1,16 @@
+npm i @angular/cli@14.2.1
+ng new store --routing  --skip-tests --minimal
+
+
+ng add @angular/material
+
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init
+
+ng g c header
+ng g c home
+
+
+To create APIs quickly
+	npm install json-server
+	json-server --watch db.json
