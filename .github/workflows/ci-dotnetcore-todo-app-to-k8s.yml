@@ -35,18 +35,19 @@ name: Build and deploy an app to AKS with Helm
 
 on:
   push:
-    branches: [ "main2" ]
+    branches: [ "main" ]
   workflow_dispatch:
 
 env:
-  AZURE_CONTAINER_REGISTRY: "demo002"
+  AZURE_CONTAINER_REGISTRY: "testacrvijay213"
   NAMESPACE: "microsvc2"
-  CONTAINER_NAME: "microsvc2"
+  CONTAINER_NAME: "dotnetcurdapp"
   RESOURCE_GROUP: "kube"
   CLUSTER_NAME: "aks"
   IMAGE_PULL_SECRET_NAME: "sqlwebapp-pull-secrete"
   CHART_PATH: ".github/mywebapp-helm"
   CHART_OVERRIDE_PATH: ".github/mywebapp-helm/microsvc2.yaml"
+
 
 jobs:
   buildImage:
@@ -60,14 +61,14 @@ jobs:
     
     # Logs in with your Azure credentials
     - name: AZ Login
-      run: az login --service-principal -u 1cfd3457-23ed-4591-9e6b-cfed3ad0770f -p MfY8Q~i-C3XuABqbNWrmVstFcNO_pCn5oOV4Zb~T --tenant ab834a0e-d914-4111-9d90-210d9c0c5212
+      run: az login --service-principal -u 03919658-7349-4b63-b24c-ec9e1c8f0a4d -p qw_8Q~Xk8yc1Q62nIXMv.pqijW~Zcb2TdptBLcPb --tenant ab834a0e-d914-4111-9d90-210d9c0c5212
     
     # Builds and pushes an image up to your Azure Container Registry
     - name: Build and push image to ACR
       run: |
-        cd DotNetCoreSqlDb-Microservice2
         az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
-    
+      working-directory: ApplicationCode/Services/DotNetCore-todo-app
+
   createSecret:
     permissions:
       contents: read
@@ -77,7 +78,6 @@ jobs:
     # Logs in with your Azure credentials
     - name: AZ Login
       run: az login --service-principal -u 1cfd3457-23ed-4591-9e6b-cfed3ad0770f -p MfY8Q~i-C3XuABqbNWrmVstFcNO_pCn5oOV4Zb~T --tenant ab834a0e-d914-4111-9d90-210d9c0c5212
-    
 
     # Retrieves your Azure Kubernetes Service cluster's kubeconfig file
     - name: Get K8s context
@@ -153,5 +153,3 @@ jobs:
           ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
         imagepullsecrets: |
           ${{ env.IMAGE_PULL_SECRET_NAME }}
-
-        
