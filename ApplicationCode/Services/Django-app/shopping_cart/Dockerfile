@@ -14,7 +14,7 @@ RUN pip install --trusted-host pypi.python.org -r requirements.txt
 COPY . .
 
 # Set environment variables
-ENV DJANGO_SETTINGS_MODULE=myproject.settings
+ENV DJANGO_SETTINGS_MODULE=shopping_cart.settings
 ENV PYTHONUNBUFFERED=1
 
 # Expose port 8000 for the Django development server
