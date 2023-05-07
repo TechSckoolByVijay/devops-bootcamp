@@ -12,7 +12,7 @@ env:
   # K8S_CONTEXT: your-k8s-context
   # K8S_SERVER: your-k8s-server
   # K8S_TOKEN: ${{ secrets.K8S_TOKEN }}
-  AZURE_CONTAINER_REGISTRY: "demo002"
+  AZURE_CONTAINER_REGISTRY: "testacrvijay213"
   NAMESPACE: "microsvc2"
   CONTAINER_NAME: "djangoapp"
   RESOURCE_GROUP: "terraform-aks-dev"
