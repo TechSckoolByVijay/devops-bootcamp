@@ -36,6 +36,9 @@ name: Build and deploy an app to AKS with Helm
 on:
   push:
     branches: [ "main" ]
+    paths: 
+    - 'ApplicationCode/Services/DotNetCore-todo-app/*'
+
   workflow_dispatch:
 
 env:
