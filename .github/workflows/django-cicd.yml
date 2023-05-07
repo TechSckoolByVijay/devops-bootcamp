@@ -15,7 +15,7 @@ env:
   AZURE_CONTAINER_REGISTRY: "testacrvijay213"
   NAMESPACE: "microsvc2"
   CONTAINER_NAME: "djangoapp"
-  RESOURCE_GROUP: "terraform-aks-dev"
+  RESOURCE_GROUP: "kube"
 
 
 jobs:
