@@ -3,7 +3,10 @@ name: Azure Static Web Apps CI/CD
 on:
   push:
     branches:
-      - main2
+      - main
+    paths:
+      - 'ApplicationCode/UI/AngularApp-Employees_Dashboard/*'
+
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
