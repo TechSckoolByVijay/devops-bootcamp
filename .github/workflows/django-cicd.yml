@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'ApplicationCode/Services/Django-app/shopping_cart/*'
 
 env:
   PROJECT_NAME: your-project-name
