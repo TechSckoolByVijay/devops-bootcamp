@@ -1,17 +1,13 @@
 <mat-toolbar color="primary">
-  <span>MyOrg Employee App</span>
-  
+  <span>XYZ Corporation</span>
   <span class="example-spacer"></span>
-  <a href={{redirectURI}} target="_blank" mat-raised-button color="accent" class="ml-1">TO DO APP</a>
+  <button mat-raised-button (click)="openAddEditEmpForm()">
+    ADD EMPLOYEE
+  </button>
 
-  
 </mat-toolbar>
 
-<div class="container">
-  <div class="row end-xs mt-1">
-    <div class="col-xs-12">
-      </div>
-  </div>
+
 
 <div class="main-body">
 
@@ -19,16 +15,6 @@
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Vijay" #input>
   </mat-form-field>
-
-  <div class="add-button">
-    <span class="example-spacer"></span>
-    <button class="ml-1"  mat-raised-button color="primary" (click)="openAddEditEmpForm() ">
-      ADD EMPLOYEE
-    </button>
-    <span class="example-spacer"></span>
-  </div>
- 
-  
 
   <div class="table-container">
     <table mat-table [dataSource]="dataSource" matSort>
