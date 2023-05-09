@@ -1,8 +1,8 @@
-module "resource_group" {
-  source = "../../module/resource_group"
-  resource_group_name = var.resource_group_name
-}
-
 output "resource_group_id" {
   value = module.resource_group.resource_group_id
+}
+
+
+output "stg_account_name" {
+  value = module.stgaccount.storage_account_name
 }

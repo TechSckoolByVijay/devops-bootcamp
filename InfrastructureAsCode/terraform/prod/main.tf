@@ -52,9 +52,15 @@ resource "random_pet" "aksrandom" {
 
 
 module "resource_group" {
-  source = "../modules/resource_group"
+  source = "../modules/core/resource_group"
+  resource_group_name = "test"
+  location = "centralindia"
+}
 
-  name     = var.resource_group_name
+
+module "stgaccount" {
+  source = "../modules/core/storage_account"
+  stg_account_name =  var.stg_account_name
   location = var.location
 }
 
@@ -66,3 +72,5 @@ module "resource_group" {
 # }
 
 # Define other environment-specific resources or configuration here
+
+
