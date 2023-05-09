@@ -31,7 +31,7 @@ terraform {
     resource_group_name   = "kube"
     storage_account_name  = "terraformstatefilestg"
     container_name        = "tfstatefiles"
-    key                   = "dev.terraform.tfstate"
+    key                   = "prod.terraform.tfstate"
   }  
 
 }
@@ -49,3 +49,20 @@ resource "random_pet" "aksrandom" {
 
 }
 
+
+
+module "resource_group" {
+  source = "../modules/resource_group"
+
+  name     = var.resource_group_name
+  location = var.location
+}
+
+# module "storage_account" {
+#   source = "../modules/storage_account"
+
+#   name                = var.storage_account_name
+#   resource_group_name = module.resource_group.name
+# }
+
+# Define other environment-specific resources or configuration here
