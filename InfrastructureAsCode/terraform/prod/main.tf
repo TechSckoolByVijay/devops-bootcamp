@@ -45,32 +45,36 @@ provider "azurerm" {
 }
 
 # 3. Terraform Resource Block: Define a Random Pet Resource
-resource "random_pet" "aksrandom" {
-
+resource "random_string" "random" {
+  length = 4
+  lower  = true
+  special = false
 }
 
 
 
-module "resource_group" {
-  source = "../modules/core/resource_group"
-  resource_group_name = "test"
-  location = "centralindia"
-}
-
-
-module "stgaccount" {
-  source = "../modules/core/storage_account"
-  stg_account_name =  var.stg_account_name
+module "core_resources" {
+  source = "../modules/core_resources"
+  resource_group_name = var.resource_group_name
   location = var.location
+  stg_account_name = "${var.product}${var.env}stg"
+  product = var.product
+  env =  var.env
 }
 
-# module "storage_account" {
-#   source = "../modules/storage_account"
 
-#   name                = var.storage_account_name
-#   resource_group_name = module.resource_group.name
-# }
+module "static_app" {
+  source = "../modules/static-webapp"
+  resource_group_name = var.resource_group_name
+  location = "centralus"
+  product = var.product
+  env =  var.env
+}
 
-# Define other environment-specific resources or configuration here
-
-
+module "containerization" {
+  source = "../modules/containerization"
+  resource_group_name = var.resource_group_name
+  location = var.location
+  product = var.product
+  env =  var.env
+}

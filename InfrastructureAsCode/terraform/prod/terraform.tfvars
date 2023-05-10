@@ -1,3 +1,4 @@
-stg_account_name = "efweferfre"
-
+resource_group_name = "test"
 location = "centralindia"
+product = "myorg"
+env = "prod"
