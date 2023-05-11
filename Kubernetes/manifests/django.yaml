@@ -24,3 +24,23 @@ spec:
           value: "*"
         # - name: DATABASE_URL
         #   value: <your_database_url>
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    workflow: actions.github.com-k8s-deploy
+    workflowFriendlyName: Django_Application_CICD
+  name: django-deployment
+  namespace: django-app
+spec:
+  ports:
+  - port: 8000
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: django
+  type: LoadBalancer
+status:
+  loadBalancer: {}
