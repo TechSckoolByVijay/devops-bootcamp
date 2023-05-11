@@ -42,14 +42,14 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_CONTAINER_REGISTRY: "testacrvijay213"
-  NAMESPACE: "microsvc2"
-  CONTAINER_NAME: "dotnetcurdapp"
-  RESOURCE_GROUP: "kube"
-  CLUSTER_NAME: "aks"
-  IMAGE_PULL_SECRET_NAME: "sqlwebapp-pull-secrete"
-  CHART_PATH: ".github/mywebapp-helm"
-  CHART_OVERRIDE_PATH: ".github/mywebapp-helm/microsvc2.yaml"
+  AZURE_CONTAINER_REGISTRY: "myorgprodacr"
+  NAMESPACE: "dotnettodoapp"
+  CONTAINER_NAME: "dotnettodoapp"
+  RESOURCE_GROUP: "test"
+  CLUSTER_NAME: "myorg-prod-aks"
+  IMAGE_PULL_SECRET_NAME: "dotnettodoapp-pull-secrete"
+  CHART_PATH: ".github/helm"
+  CHART_OVERRIDE_PATH: ".github/helm/values-dotnetToDoApp.yaml"
 
 
 jobs:
@@ -64,8 +64,8 @@ jobs:
     
     # Logs in with your Azure credentials
     - name: AZ Login
-      run: az login --service-principal -u 03919658-7349-4b63-b24c-ec9e1c8f0a4d -p qw_8Q~Xk8yc1Q62nIXMv.pqijW~Zcb2TdptBLcPb --tenant ab834a0e-d914-4111-9d90-210d9c0c5212
-    
+      run: az login --service-principal -u 0f5f80d8-e9b7-40ff-94ea-ec1bdc0b8da2 -p QVK8Q~JNwhus08RkmUeTvShyGPNUxPdoHwAkBctv --tenant ab834a0e-d914-4111-9d90-210d9c0c5212
+
     # Builds and pushes an image up to your Azure Container Registry
     - name: Build and push image to ACR
       run: |
@@ -80,7 +80,7 @@ jobs:
     steps:
     # Logs in with your Azure credentials
     - name: AZ Login
-      run: az login --service-principal -u 1cfd3457-23ed-4591-9e6b-cfed3ad0770f -p MfY8Q~i-C3XuABqbNWrmVstFcNO_pCn5oOV4Zb~T --tenant ab834a0e-d914-4111-9d90-210d9c0c5212
+      run: az login --service-principal -u 0f5f80d8-e9b7-40ff-94ea-ec1bdc0b8da2 -p QVK8Q~JNwhus08RkmUeTvShyGPNUxPdoHwAkBctv --tenant ab834a0e-d914-4111-9d90-210d9c0c5212
 
     # Retrieves your Azure Kubernetes Service cluster's kubeconfig file
     - name: Get K8s context
@@ -105,7 +105,7 @@ jobs:
     - name: Create K8s secret for pulling image from ACR
       uses: Azure/k8s-create-secret@v1.1
       with:
-        namespace: microsvc2
+        namespace: ${{ env.NAMESPACE }}
         container-registry-url: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io
         container-registry-username: ${{ steps.get-acr-creds.outputs.username }}
         container-registry-password: ${{ steps.get-acr-creds.outputs.password }}
@@ -124,8 +124,8 @@ jobs:
     
     # Logs in with your Azure credentials
     - name: AZ Login
-      run: az login --service-principal -u 1cfd3457-23ed-4591-9e6b-cfed3ad0770f -p MfY8Q~i-C3XuABqbNWrmVstFcNO_pCn5oOV4Zb~T --tenant ab834a0e-d914-4111-9d90-210d9c0c5212
-    
+      run: az login --service-principal -u 0f5f80d8-e9b7-40ff-94ea-ec1bdc0b8da2 -p QVK8Q~JNwhus08RkmUeTvShyGPNUxPdoHwAkBctv --tenant ab834a0e-d914-4111-9d90-210d9c0c5212
+
     # Retrieves your Azure Kubernetes Service cluster's kubeconfig file
     - name: Get K8s context
       uses: azure/aks-set-context@v2.0
