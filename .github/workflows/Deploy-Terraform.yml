@@ -19,6 +19,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    # Logs in with your Azure credentials
+    - name: AZ Login
+      run: az login --service-principal -u 0f5f80d8-e9b7-40ff-94ea-ec1bdc0b8da2 -p QVK8Q~JNwhus08RkmUeTvShyGPNUxPdoHwAkBctv --tenant ab834a0e-d914-4111-9d90-210d9c0c5212
+  
+
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
