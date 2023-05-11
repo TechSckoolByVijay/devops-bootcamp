@@ -1,0 +1,40 @@
+name: Deploy Terraform
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'InfrastructureAsCode/terraform/*'
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    defaults:
+      working
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: '1.0.5'
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan -out=tfplan
+      working-directory: InfrastructureAsCode/terraform/prod
+
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terraform apply -auto-approve tfplan
+      working-directory: InfrastructureAsCode/terraform/prod
+
+    - name: Terraform Destroy
+      if: github.event_name == 'delete'
+      working-directory: InfrastructureAsCode/terraform/prod
