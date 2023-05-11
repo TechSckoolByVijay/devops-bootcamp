@@ -65,6 +65,7 @@ module "core_resources" {
 
 module "static_app" {
   source = "../modules/static-webapp"
+  depends_on = [ module.core_resources ]
   resource_group_name = var.resource_group_name
   location = "centralus"
   product = var.product
@@ -73,6 +74,7 @@ module "static_app" {
 
 module "containerization" {
   source = "../modules/containerization"
+  depends_on = [ module.core_resources ]
   resource_group_name = var.resource_group_name
   location = var.location
   product = var.product
