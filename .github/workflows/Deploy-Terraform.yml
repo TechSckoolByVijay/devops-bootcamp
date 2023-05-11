@@ -31,6 +31,15 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
+      env:
+        ARM_CLIENT_ID: "0f5f80d8-e9b7-40ff-94ea-ec1bdc0b8da2"
+        ARM_CLIENT_SECRET: "QVK8Q~JNwhus08RkmUeTvShyGPNUxPdoHwAkBctv"
+        ARM_TENANT_ID: "ab834a0e-d914-4111-9d90-210d9c0c5212"
+        ARM_SUBSCRIPTION_ID: "db8fcd00-4f68-42c3-8b19-947bf4d7b2c5"
+        RESOURCE_GROUP: "core-resources"
+        STORAGE_ACCOUNT: "myorgterraformstg"
+        CONTAINER_NAME: "tfstatefiles"
+        
 
     - name: Terraform Plan
       id: plan
