@@ -7,6 +7,9 @@ on:
     paths:
       - 'InfrastructureAsCode/terraform/*'
 
+defaults:
+  run:
+    working-directory: InfrastructureAsCode/terraform/prod
 
 jobs:
   deploy:
