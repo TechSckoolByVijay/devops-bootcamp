@@ -31,13 +31,11 @@ jobs:
     - name: Terraform Plan
       id: plan
       run: terraform plan -out=tfplan
-      working-directory: InfrastructureAsCode/terraform/prod
-
+     
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve tfplan
-      working-directory: InfrastructureAsCode/terraform/prod
-
+     
     - name: Terraform Destroy
       if: github.event_name == 'delete'
-      working-directory: InfrastructureAsCode/terraform/prod
+      
