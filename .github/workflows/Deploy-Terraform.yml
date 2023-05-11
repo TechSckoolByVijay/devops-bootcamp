@@ -15,8 +15,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    defaults:
-      working
     steps:
     - uses: actions/checkout@v2
 
@@ -36,6 +34,3 @@ jobs:
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve tfplan
      
-    - name: Terraform Destroy
-      if: github.event_name == 'delete'
-      
