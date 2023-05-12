@@ -1,13 +1,5 @@
 FROM python:3.8
 
-# Set environment variables
-ENV PYTHONUNBUFFERED 1
-ENV SQL_SERVER_HOST=techsckool.database.windows.net
-ENV SQL_SERVER_PORT=1433
-ENV SQL_SERVER_DATABASE=sqlwebapp
-ENV SQL_SERVER_USER=testuser
-ENV SQL_SERVER_PASSWORD=P@ssword2023
-
 # Install dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -24,8 +16,6 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 RUN curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
 RUN apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql17
 
-
-
 COPY requirements.txt /app/
 WORKDIR /app
 RUN pip install --no-cache-dir -r requirements.txt
@@ -38,8 +28,3 @@ EXPOSE 8000
 
 # Start Django application
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
-
-
-
-
