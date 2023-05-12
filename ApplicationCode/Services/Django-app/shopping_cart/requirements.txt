@@ -4,4 +4,3 @@ mssql-django
 django-cors-headers
 pyodbc==4.0.32
 
-
