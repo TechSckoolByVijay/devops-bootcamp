@@ -3,4 +3,3 @@ djangorestframework==3.12.4
 mssql-django
 django-cors-headers
 pyodbc==4.0.32
-
