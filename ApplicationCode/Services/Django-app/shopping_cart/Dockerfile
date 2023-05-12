@@ -1,24 +1,39 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9-slim-buster
-
-# Set the working directory to /app
-WORKDIR /app
-
-# Copy the requirements file into the container
-COPY requirements.txt .
-
-# Install any needed packages specified in requirements.txt
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
-
-# Copy the rest of the application code into the container
-COPY . .
+FROM python:3.8
 
 # Set environment variables
-ENV DJANGO_SETTINGS_MODULE=shopping_cart.settings
-ENV PYTHONUNBUFFERED=1
+ENV PYTHONUNBUFFERED 1
+ENV SQL_SERVER_HOST=techsckool.database.windows.net
+ENV SQL_SERVER_PORT=1433
+ENV SQL_SERVER_DATABASE=sqlwebapp
+ENV SQL_SERVER_USER=testuser
+ENV SQL_SERVER_PASSWORD=P@ssword2023
 
-# Expose port 8000 for the Django development server
+# Install dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        unixodbc-dev \
+        python3-dev \
+        libgssapi-krb5-2 \
+        libsasl2-2 \
+        libsasl2-modules-gssapi-mit \
+        && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt /app/
+WORKDIR /app
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy project files
+COPY . /app/
+
+# Expose port 8000
 EXPOSE 8000
 
-# Start the Django development server
+# Start Django application
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+
+
+
+
