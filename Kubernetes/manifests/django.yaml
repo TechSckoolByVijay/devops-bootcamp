@@ -54,7 +54,6 @@ metadata:
     workflow: actions.github.com-k8s-deploy
     workflowFriendlyName: Django_Application_CICD
   name: django-deployment
-  namespace: django-app
 spec:
   ports:
   - port: 8000
