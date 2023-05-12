@@ -32,13 +32,6 @@ spec:
       containers:
       - name: django
         image: myorgprodacr.azurecr.io/djangoapp:d5732d9886837ddb01df7d87b03ac3a754f8914d
-        command:
-            - /bin/bash
-            - -c
-            - |
-              python manage.py makemigrations
-              python manage.py migrate
-              python manage.py runserver
         ports:
         - containerPort: 8000
         envFrom:
