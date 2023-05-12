@@ -1,31 +1,32 @@
-FROM python:3.9-slim-buster
+# Use an official Python runtime as a parent image
+FROM ubuntu:20.04
 
-# Install necessary system packages
-RUN apt-get update \
-    && apt-get install -y gcc g++ unixodbc-dev curl
-
-# Install the ODBC driver for MSSQL
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-    && curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list \
-    && apt-get update \
-    && ACCEPT_EULA=Y apt-get install -y msodbcsql17 \
-    && rm -rf /var/lib/apt/lists/*
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip unixodbc-dev libgssapi-krb5-2 && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the requirements file and install the dependencies
-COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy the requirements file into the container at /app
+COPY requirements.txt /app
 
-# Copy the Django project to the container
-COPY . /app/
+# Install any needed packages specified in requirements.txt
+RUN pip3 install -r requirements.txt
 
-# Run migrations
-RUN python manage.py migrate
+# Copy the rest of the application code into the container at /app
+COPY . /app
+
+# Set environment variables for SQL Server
+ENV SQL_SERVER_HOST=techsckool.database.windows.net
+ENV SQL_SERVER_PORT=1433
+ENV SQL_SERVER_DATABASE=sqlwebapp
+ENV SQL_SERVER_USER=testuser
+ENV SQL_SERVER_PASSWORD=P@ssword2023
 
 # Expose port 8000 for the Django application
 EXPOSE 8000
 
-# Start the Django development server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Start the Django application
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
