@@ -1,32 +1,24 @@
 # Use an official Python runtime as a parent image
-FROM ubuntu:20.04
-
-# Install system dependencies
-RUN apt-get update && \
-    apt-get install -y python3 python3-pip unixodbc-dev libgssapi-krb5-2 && \
-    rm -rf /var/lib/apt/lists/*
+FROM python:3.9-slim-buster
 
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the requirements file into the container at /app
-COPY requirements.txt /app
+# Copy the requirements file into the container
+COPY requirements.txt .
 
 # Install any needed packages specified in requirements.txt
-RUN pip3 install -r requirements.txt
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
-# Copy the rest of the application code into the container at /app
-COPY . /app
+# Copy the rest of the application code into the container
+COPY . .
 
-# Set environment variables for SQL Server
-ENV SQL_SERVER_HOST=techsckool.database.windows.net
-ENV SQL_SERVER_PORT=1433
-ENV SQL_SERVER_DATABASE=sqlwebapp
-ENV SQL_SERVER_USER=testuser
-ENV SQL_SERVER_PASSWORD=P@ssword2023
+# Set environment variables
+ENV DJANGO_SETTINGS_MODULE=shopping_cart.settings
+ENV PYTHONUNBUFFERED=1
 
-# Expose port 8000 for the Django application
+# Expose port 8000 for the Django development server
 EXPOSE 8000
 
-# Start the Django application
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+# Start the Django development server
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
