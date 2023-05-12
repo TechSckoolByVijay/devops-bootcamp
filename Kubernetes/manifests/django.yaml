@@ -8,10 +8,17 @@ data:
   SQL_SERVER_PORT: "1433"
   SQL_SERVER_DATABASE: "sqlwebapp"
   SQL_SERVER_USER: "testuser"
-  SQL_SERVER_PASSWORD: "P@ssword2023"
   VIJAY: "Saini"
 
+---
 
+apiVersion: v1
+kind: Secret
+metadata:
+  name:  database_password
+data:
+   SQL_SERVER_PASSWORD: "UEBzc3dvcmQyMDIz"
+type: Opaque
 
 ---
 
@@ -37,6 +44,8 @@ spec:
         envFrom:
         - configMapRef:
             name: djangoapp
+        - secretRef:
+              name: database_password
         
 ---
 
