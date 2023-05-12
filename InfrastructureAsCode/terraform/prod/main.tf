@@ -62,6 +62,14 @@ module "core_resources" {
   env =  var.env
 }
 
+module "azurerm_sql_database" {
+  source = "../modules/database"
+  depends_on = [ module.core_resources ]
+  resource_group_name = var.resource_group_name
+  location = var.location
+  product = var.product
+  env =  var.env
+}
 
 module "static_app" {
   source = "../modules/static-webapp"
