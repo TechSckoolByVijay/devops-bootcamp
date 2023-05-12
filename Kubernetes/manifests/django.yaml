@@ -38,6 +38,7 @@ spec:
             - |
               python manage.py makemigrations
               python manage.py migrate
+              python manage.py runserver
         ports:
         - containerPort: 8000
         envFrom:
