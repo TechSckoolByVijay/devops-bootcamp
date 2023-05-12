@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -83,17 +84,19 @@ WSGI_APPLICATION = 'shopping_cart.wsgi.application'
 # }
 
 DATABASES = {
-    "default": {
-        "ENGINE": "mssql",
-        "NAME": "sqlwebapp",
-        "USER": "testuser",
-        "PASSWORD": "P@ssword2023",
-        "HOST": "techsckool.database.windows.net",
-        "PORT": "1433",
-        "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server", 
+    'default': {
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': os.getenv('SQL_SERVER_DATABASE'),
+        'USER': os.getenv('SQL_SERVER_USER'),
+        'PASSWORD': os.getenv('SQL_SERVER_PASSWORD'),
+        'HOST': os.getenv('SQL_SERVER_HOST'),
+        'PORT': os.getenv('SQL_SERVER_PORT'),
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
         },
-    },
+    }
 }
+
 
 
 # Password validation
