@@ -11,7 +11,7 @@ on:
 
 env:
   AZURE_CONTAINER_REGISTRY: "myorgprodacr"
-  NAMESPACE: "django-app"
+  NAMESPACE: "django-app2"
   CLUSTER_NAME: "myorg-prod-aks"
   CONTAINER_NAME: "djangoapp"
   RESOURCE_GROUP: "test"
