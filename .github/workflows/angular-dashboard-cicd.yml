@@ -11,6 +11,8 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
+  
+  workflow_dispatch:
 
 env:
   app-dir: 'ApplicationCode/UI/AngularApp-Employees_Dashboard/'
