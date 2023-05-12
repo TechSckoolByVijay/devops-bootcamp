@@ -15,7 +15,7 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-  name:  database_password
+  name:  databasepassword
 data:
    SQL_SERVER_PASSWORD: "UEBzc3dvcmQyMDIz"
 type: Opaque
@@ -45,7 +45,7 @@ spec:
         - configMapRef:
             name: djangoapp
         - secretRef:
-              name: database_password
+              name: databasepassword
         
 ---
 

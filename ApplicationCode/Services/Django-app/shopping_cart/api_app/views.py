@@ -14,7 +14,7 @@ class CartItemViews(APIView):
         else:
             return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
             
-    
+     
     def get(self, request, id=None):
         if id:
             item = CartItem.objects.get(id=id)
