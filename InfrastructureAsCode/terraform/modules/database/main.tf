@@ -1,29 +1,37 @@
 # Create an Azure SQL Server
-resource "azurerm_sql_server" "myorgdbserver" {
-  name                         = "example-sql-server"
-  resource_group_name          = azurerm_resource_group.example.name
-  location                     = azurerm_resource_group.example.location
+
+resource "azurerm_sql_server" "sql_server" {
+  name                         = "${var.product}-${var.env}-sqlserver"
+  resource_group_name          = var.resource_group_name
+  location                     = var.location
   version                      = "12.0"
-  administrator_login          = "sqladmin"
-  administrator_login_password = "P@ssw0rd1234"
+  administrator_login          = "${var.product}-${var.env}-user"
+  administrator_login_password = var.sql_server_admin_password
 }
 
 # Create a firewall rule to allow traffic from all Azure services
 resource "azurerm_sql_firewall_rule" "example" {
   name                = "AllowAllWindowsAzureIps"
-  resource_group_name = azurerm_resource_group.example.name
-  server_name         = azurerm_sql_server.example.name
+  resource_group_name = var.resource_group_name
+  server_name         = azurerm_sql_server.sql_server.name
   start_ip_address    = "0.0.0.0"
   end_ip_address      = "0.0.0.0"
 }
 
 # Create an Azure SQL Database
-resource "azurerm_sql_database" "example" {
-  name                = "example-db"
-  resource_group_name = azurerm_resource_group.example.name
-  server_name         = azurerm_sql_server.example.name
-  edition             = "Basic"
-  collation           = "SQL_Latin1_General_CP1_CI_AS"
-  max_size_bytes      = 2147483648
-}
 
+resource "azurerm_sql_database" "db" {
+  name                     = "${var.product}-${var.env}-db"
+  resource_group_name      = var.resource_group_name
+  server_name              = azurerm_sql_server.sql_server.name
+  edition                  = "GeneralPurpose"
+  collation                = "SQL_Latin1_General_CP1_CI_AS"
+  create_mode              = "Default"
+  max_size_bytes           = 1073741824 # 1 GB
+  zone_redundant           = false
+
+  auto_pause_delay_in_minutes       = 60
+  min_capacity                      = 0.5
+  max_capacity                      = 1
+  read_scale                       = true
+}
