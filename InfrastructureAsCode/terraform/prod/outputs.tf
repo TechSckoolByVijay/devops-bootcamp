@@ -12,10 +12,10 @@ output "webappName" {
 }
 
 
-output "acrName" {
-  value = module.containerization.aksName
-}
+# output "acrName" {
+#   value = module.containerization.aksName
+# }
 
-output "aksName" {
-  value = module.containerization.aksName
-}
+# output "aksName" {
+#   value = module.containerization.aksName
+# }

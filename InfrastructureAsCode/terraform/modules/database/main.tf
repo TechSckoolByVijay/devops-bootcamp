@@ -23,15 +23,11 @@ resource "azurerm_sql_firewall_rule" "example" {
 resource "azurerm_sql_database" "db" {
   name                     = "${var.product}-${var.env}-db"
   resource_group_name      = var.resource_group_name
+  location                 = var.location
   server_name              = azurerm_sql_server.sql_server.name
   edition                  = "GeneralPurpose"
   collation                = "SQL_Latin1_General_CP1_CI_AS"
   create_mode              = "Default"
   max_size_bytes           = 1073741824 # 1 GB
   zone_redundant           = false
-
-  auto_pause_delay_in_minutes       = 60
-  min_capacity                      = 0.5
-  max_capacity                      = 1
-  read_scale                       = true
 }
