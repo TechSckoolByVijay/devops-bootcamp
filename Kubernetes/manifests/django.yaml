@@ -8,7 +8,6 @@ data:
   SQL_SERVER_PORT: "1433"
   SQL_SERVER_DATABASE: "sqlwebapp"
   SQL_SERVER_USER: "testuser"
-  VIJAY: "Saini"
 
 ---
 
