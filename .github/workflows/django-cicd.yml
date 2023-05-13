@@ -36,8 +36,12 @@ jobs:
         resource-group: ${{ env.RESOURCE_GROUP }}
         cluster-name: ${{ env.CLUSTER_NAME }}    # Retrieves your Azure Kubernetes Service cluster's kubeconfig file
     
-    # - name: Create Namespace
-    #   run: kubectl create ns ${{ env.NAMESPACE }}
+    - name: Create namespace if it does not exist
+      run: |
+          set -e
+          if ! kubectl get namespace ${{ env.NAMESPACE }}; then
+            kubectl create namespace ${{ env.NAMESPACE }}
+          fi
 
     # Retrieves the credentials for pulling images from your Azure Container Registry
     - name: Get ACR credentials

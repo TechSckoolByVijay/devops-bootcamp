@@ -88,6 +88,13 @@ jobs:
       with:
         resource-group: ${{ env.RESOURCE_GROUP }}
         cluster-name: ${{ env.CLUSTER_NAME }}
+    
+    - name: Create namespace if it does not exist
+      run: |
+            set -e
+            if ! kubectl get namespace ${{ env.NAMESPACE }}; then
+              kubectl create namespace ${{ env.NAMESPACE }}
+            fi
 
     # Retrieves the credentials for pulling images from your Azure Container Registry
     - name: Get ACR credentials

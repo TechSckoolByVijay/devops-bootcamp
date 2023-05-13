@@ -24,22 +24,35 @@ resource "azurerm_virtual_network" "vnet" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   address_space       = ["10.0.0.0/16"]
+}
 
-  subnet {
-    name           = "AKSSubnet"
-    address_prefix = "10.0.0.0/17"
-  }
-  
-  subnet {
-    name           = "VMSubnet"
-    address_prefix = "10.0.128.0/20"
-  }
+# https://www.davidc.net/sites/default/subnets/subnets.html  for subnet division.
+resource "azurerm_subnet" "AKSSubnet" {
+  name                 = "AKSSubnet"
+  address_prefixes     = ["10.0.0.0/22"]
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  resource_group_name  = azurerm_resource_group.rg.name
+}
 
-  subnet {
-    name           = "Services"
-    address_prefix = "10.0.144.0/20"
-  }
-  # https://www.davidc.net/sites/default/subnets/subnets.html  for subnet division.
+resource "azurerm_subnet" "VMSubnet" {
+  name                 = "VMSubnet"
+  address_prefixes     = ["10.0.4.0/24"]
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  resource_group_name  = azurerm_resource_group.rg.name
+}
+
+resource "azurerm_subnet" "DBSubnet" {
+  name                 = "DBSubnet"
+  address_prefixes     = ["10.0.5.0/24"]
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  resource_group_name  = azurerm_resource_group.rg.name
+}
+
+resource "azurerm_subnet" "Services" {
+  name                 = "Services"
+  address_prefixes     = ["10.0.6.0/24"]
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  resource_group_name  = azurerm_resource_group.rg.name
 }
 
 

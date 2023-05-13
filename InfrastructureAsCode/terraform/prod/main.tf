@@ -69,7 +69,8 @@ module "azurerm_sql_database" {
   location = var.location
   product = var.product
   env =  var.env
-  sql_server_admin_password = "P@ssword2023"
+  sql_server_admin_password = var.sql_server_admin_password
+  subnet_id = module.core_resources.database_subnet_id
 }
 
 module "static_app" {
@@ -81,11 +82,11 @@ module "static_app" {
   env =  var.env
 }
 
-# module "containerization" {
-#   source = "../modules/containerization"
-#   depends_on = [ module.core_resources ]
-#   resource_group_name = var.resource_group_name
-#   location = var.location
-#   product = var.product
-#   env =  var.env
-# }
+module "containerization" {
+  source = "../modules/containerization"
+  depends_on = [ module.core_resources ]
+  resource_group_name = var.resource_group_name
+  location = var.location
+  product = var.product
+  env =  var.env
+}

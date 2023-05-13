@@ -3,7 +3,6 @@ variable "resource_group_name" {
   description = "Name of the resource group"
 }
 
-
 variable "location" {
   type        = string
   description = "Name of the resource group"

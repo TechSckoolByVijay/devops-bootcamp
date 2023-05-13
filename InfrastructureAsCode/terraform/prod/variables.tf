@@ -3,13 +3,11 @@ variable "resource_group_name" {
   description = "Name of the resource group"
 }
 
-
 variable "location" {
   type        = string
   description = "Name of the resource group"
   default = "centralindia"
 }
-
 
 variable "product" {
   type        = string
@@ -17,6 +15,11 @@ variable "product" {
 }
 
 variable "env" {
+  type        = string
+  description = "Name of the resource group"
+}
+
+variable "sql_server_admin_password" {
   type        = string
   description = "Name of the resource group"
 }

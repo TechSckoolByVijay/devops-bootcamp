@@ -20,5 +20,9 @@ variable "env" {
 
 variable "sql_server_admin_password" {
   type    = string
-  default = "myprojectpassword"
+}
+
+variable "subnet_id" {
+  type    = string
+  description = "allow the traffic from database subnet"
 }
