@@ -49,7 +49,7 @@ env:
   CLUSTER_NAME: "myorg-prod-aks"
   IMAGE_PULL_SECRET_NAME: "dotnettodoapp-pull-secrete"
   CHART_PATH: "Kubernetes/helm/dotnetcore-todo-app"
-  CHART_OVERRIDE_PATH: ".Kubernetes/helm/dotnetcore-todo-app/values-dotnetToDoApp.yaml"
+  CHART_OVERRIDE_PATH: "Kubernetes/helm/dotnetcore-todo-app/values-dotnetToDoApp.yaml"
 
 jobs:
   buildImage:
