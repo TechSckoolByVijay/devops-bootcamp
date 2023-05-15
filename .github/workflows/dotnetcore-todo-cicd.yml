@@ -48,9 +48,8 @@ env:
   RESOURCE_GROUP: "test"
   CLUSTER_NAME: "myorg-prod-aks"
   IMAGE_PULL_SECRET_NAME: "dotnettodoapp-pull-secrete"
-  CHART_PATH: ".github/helm"
+  CHART_PATH: "Kubernetes/helm/dotnetcore-todo-app"
   CHART_OVERRIDE_PATH: ".github/helm/values-dotnetToDoApp.yaml"
-
 
 jobs:
   buildImage:
