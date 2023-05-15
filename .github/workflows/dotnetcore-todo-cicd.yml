@@ -151,8 +151,8 @@ jobs:
         helmChart: ${{ env.CHART_PATH }}
         overrideFiles: ${{ env.CHART_OVERRIDE_PATH }}
         overrides: |     
-          replicas:2,
-          appsettings: '{ "property1": "value1", "property2": "value2" }'
+          replicas:2
+          appsettings: 'cdscds'
         helm-version: 'latest' 
       id: bake
 
