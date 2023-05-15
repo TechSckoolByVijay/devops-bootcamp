@@ -152,7 +152,7 @@ jobs:
         overrideFiles: ${{ env.CHART_OVERRIDE_PATH }}
         overrides: |     
           replicas:2
-          appsettings: 'cdscds'
+          appsettings: '{ property1: value1, property2: value2 }'
         helm-version: 'latest' 
       id: bake
 
