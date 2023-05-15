@@ -36,8 +36,8 @@ name: Build and deploy an app to AKS with Helm
 on:
   push:
     branches: [ "main" ]
-    paths: 
-    - 'ApplicationCode/Services/DotNetCore-todo-app/*'
+    #paths: 
+    #- 'ApplicationCode/Services/DotNetCore-todo-app/*'
 
   workflow_dispatch:
 
@@ -147,8 +147,8 @@ jobs:
         helmChart: ${{ env.CHART_PATH }}
         overrideFiles: ${{ env.CHART_OVERRIDE_PATH }}
         overrides: |     
-          replicas:2
-          appsettings:'${{ secrets.APPSETTINGS }}'
+          "replicas:2"
+          "appsettings:${{ secrets.APPSETTINGS }}"
         helm-version: 'latest' 
       id: bake
 
