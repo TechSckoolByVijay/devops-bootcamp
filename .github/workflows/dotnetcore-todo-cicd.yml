@@ -138,10 +138,6 @@ jobs:
         resource-group: ${{ env.RESOURCE_GROUP }}
         cluster-name: ${{ env.CLUSTER_NAME }}
     
-    - name: Get dynamic value
-      id: get_value
-      run: echo "::set-output name=appsettings::${{secrets.APPSETTINGS}}"
-
         
     # Runs Helm to create manifest files
     - name: Bake deployment
@@ -151,7 +147,7 @@ jobs:
         helmChart: ${{ env.CHART_PATH }}
         overrideFiles: ${{ env.CHART_OVERRIDE_PATH }}
         overrides: |
-          appsettings=${{ steps.get_value.outputs.appsettings  }}
+          replicas:2
         helm-version: 'latest' 
       id: bake
 
