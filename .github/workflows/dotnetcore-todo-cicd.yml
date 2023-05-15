@@ -140,7 +140,7 @@ jobs:
     
     - name: Get dynamic value
       id: get_value
-      run: echo "::set-output name=dynamic_value::$(some-command-to-get-value)"
+      run: echo "::set-output name=appsettings::${{secrets.APPSETTINGS}}"
 
         
     # Runs Helm to create manifest files
@@ -151,7 +151,7 @@ jobs:
         helmChart: ${{ env.CHART_PATH }}
         overrideFiles: ${{ env.CHART_OVERRIDE_PATH }}
         overrides: |
-          appsettings: '{ "property1": "value1", "property2": "value2" }'
+          appsettings=${{ steps.get_value.outputs.appsettings  }}
         helm-version: 'latest' 
       id: bake
 
