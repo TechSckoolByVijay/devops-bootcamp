@@ -151,7 +151,7 @@ jobs:
         helmChart: ${{ env.CHART_PATH }}
         overrideFiles: ${{ env.CHART_OVERRIDE_PATH }}
         overrides: |
-          appsettings: '{ property1: value1, property2: value2 }'
+          appsettings: '{ "property1": "value1", "property2": "value2" }'
         helm-version: 'latest' 
       id: bake
 
