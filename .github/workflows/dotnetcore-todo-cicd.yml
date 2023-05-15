@@ -43,13 +43,13 @@ on:
 
 env:
   AZURE_CONTAINER_REGISTRY: "myorgprodacr"
-  NAMESPACE: "dotnettodoapp"
+  NAMESPACE: "dotnet-todo-app"
   CONTAINER_NAME: "dotnettodoapp"
   RESOURCE_GROUP: "test"
   CLUSTER_NAME: "myorg-prod-aks"
   IMAGE_PULL_SECRET_NAME: "dotnettodoapp-pull-secrete"
   CHART_PATH: "Kubernetes/helm/dotnetcore-todo-app"
-  CHART_OVERRIDE_PATH: ".github/helm/values-dotnetToDoApp.yaml"
+  CHART_OVERRIDE_PATH: ".Kubernetes/helm/dotnetcore-todo-app/values-dotnetToDoApp.yaml"
 
 jobs:
   buildImage:
