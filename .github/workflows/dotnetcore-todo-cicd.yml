@@ -148,7 +148,7 @@ jobs:
         overrideFiles: ${{ env.CHART_OVERRIDE_PATH }}
         overrides: |     
           replicas:2
-          appsettings='${{ secrets.APPSETTINGS }}'
+          appsettings:'${{ secrets.APPSETTINGS }}'
         helm-version: 'latest' 
       id: bake
 
