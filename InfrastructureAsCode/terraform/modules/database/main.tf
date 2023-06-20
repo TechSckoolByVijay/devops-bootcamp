@@ -33,7 +33,7 @@ resource "azurerm_sql_database" "db" {
   resource_group_name      = var.resource_group_name
   location                 = var.location
   server_name              = azurerm_sql_server.sql_server.name
-  edition                  = "GeneralPurpose"
+  edition                  = "Basic"
   collation                = "SQL_Latin1_General_CP1_CI_AS"
   create_mode              = "Default"
   max_size_bytes           = 1073741824 # 1 GB
