@@ -31,7 +31,7 @@ terraform {
     resource_group_name   = "core-resources"
     storage_account_name  = "myorgterraformstg"
     container_name        = "tfstatefiles"
-    key                   = "prod.terraform.tfstate"
+    key                   = "demo.terraform.tfstate"
   }  
 
 }
