@@ -1,5 +1,5 @@
-resource_group_name = "test"
+resource_group_name = "learnk8s"
 location = "centralindia"
-product = "myorg"
+product = "demo"
 env = "prod"
 sql_server_admin_password="P@ssword2023"
