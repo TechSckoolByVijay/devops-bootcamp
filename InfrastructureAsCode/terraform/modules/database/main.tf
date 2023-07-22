@@ -18,12 +18,12 @@ resource "azurerm_sql_firewall_rule" "allow-all" {
   end_ip_address      = "0.0.0.0"
 }
 
-resource "azurerm_sql_virtual_network_rule" "allow-database-subnet" {
-  name                = "allow-database-subnet"
-  resource_group_name = var.resource_group_name
-  server_name         = azurerm_sql_server.sql_server.name
-  subnet_id           = var.subnet_id
-}
+# resource "azurerm_sql_virtual_network_rule" "allow-database-subnet" {
+#   name                = "allow-database-subnet"
+#   resource_group_name = var.resource_group_name
+#   server_name         = azurerm_sql_server.sql_server.name
+#   subnet_id           = var.subnet_id
+# }
 
 
 # Create an Azure SQL Database
