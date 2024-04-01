@@ -17,7 +17,7 @@ jobs:
           git config --global user.email "actions@example.com"
           git config --global user.name "GitHub Actions"
       
-      
+  
       - name: Create new tag
         run: |
           git tag -a "vijaysainitag" -m "Auto-generated tag by GitHub Actions"
