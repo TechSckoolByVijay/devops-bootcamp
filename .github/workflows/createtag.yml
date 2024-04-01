@@ -19,7 +19,6 @@ jobs:
       
       
       - name: Create new tag
-        if: steps.latest_tag.outputs.tag != ''
         run: |
           git tag -a "vijaysainitag" -m "Auto-generated tag by GitHub Actions"
           git push origin --tags
