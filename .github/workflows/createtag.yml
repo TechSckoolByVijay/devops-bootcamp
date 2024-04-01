@@ -1,0 +1,29 @@
+name: Create Tag
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Git
+        run: |
+          git config --global user.email "actions@example.com"
+          git config --global user.name "GitHub Actions"
+      
+      - name: Get latest tag
+        id: latest_tag
+        run: echo "::set-output name=tag::$(git describe --tags --abbrev=0)"
+        continue-on-error: true
+      
+      - name: Create new tag
+        if: steps.latest_tag.outputs.tag != ''
+        run: |
+          git tag -a v${{ github.run_number }} -m "Auto-generated tag by GitHub Actions"
+          git push origin --tags
