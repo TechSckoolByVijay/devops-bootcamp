@@ -17,13 +17,9 @@ jobs:
           git config --global user.email "actions@example.com"
           git config --global user.name "GitHub Actions"
       
-      - name: Get latest tag
-        id: latest_tag
-        run: echo "::set-output name=tag::$(git describe --tags --abbrev=0)"
-        continue-on-error: true
       
       - name: Create new tag
         if: steps.latest_tag.outputs.tag != ''
         run: |
-          git tag -a v${{ github.run_number }} -m "Auto-generated tag by GitHub Actions"
+          git tag -a "vijaysainitag" -m "Auto-generated tag by GitHub Actions"
           git push origin --tags
